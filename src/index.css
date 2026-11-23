@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply bg-[#FAF8F5] font-sans text-[#14171A] antialiased;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply m-0 min-h-screen min-w-[320px] bg-[#FAF8F5] text-[#14171A] selection:bg-[#C2410C] selection:text-white;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(194, 65, 12, 0.025) 0px, transparent 45%),
+      radial-gradient(at 100% 0%, rgba(217, 119, 6, 0.025) 0px, transparent 40%),
+      radial-gradient(at 50% 100%, rgba(4, 120, 87, 0.02) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* Custom artisanal scrollbar for light editorial theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F5F2EB;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-[#D5CDBF] transition-colors hover:bg-[#B8AF9F];
+  }
+}
+
+@layer utilities {
+  .editorial-card {
+    background: #FFFFFF;
+    border: 1px solid #E8E2D5;
+    box-shadow: 0 1px 3px rgba(44, 38, 34, 0.03), 0 6px 20px -3px rgba(44, 38, 34, 0.05);
+  }
+
+  .editorial-card-hover {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .editorial-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -4px rgba(44, 38, 34, 0.09), 0 4px 10px -2px rgba(44, 38, 34, 0.03);
+    border-color: #D5CDBF;
+  }
+
+  .broadsheet-masthead {
+    border-top: 4px solid #14171A;
+    border-bottom: 2px solid #14171A;
+    padding: 12px 0;
+  }
+
+  .broadsheet-double-rule {
+    border-top: 3px double #14171A;
+    border-bottom: 1px solid #14171A;
+  }
+
+  .drop-cap::first-letter {
+    float: left;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3.25rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    font-weight: 800;
+    color: #C2410C;
+  }
+
+  .editorial-gradient-text {
+    @apply bg-gradient-to-r from-[#14171A] via-[#C2410C] to-[#9A3412] bg-clip-text text-transparent;
+  }
+}
+
+.edition-print-container {
+  display: none;
+}
+
+.preloader-sweep {
+  animation: preloader-sweep 1.4s ease-in-out infinite;
+}
+
+@keyframes preloader-sweep {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(310%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-sweep {
+    animation: none;
+    transform: translateX(100%);
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .edition-print-container,
+  .edition-print-container * {
+    visibility: visible !important;
+  }
+
+  .edition-print-container {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    color: #14171a;
+    background: #fff;
+    font-family:
+      "Noto Serif Gujarati", "Noto Serif Devanagari", "Noto Serif Bengali",
+      "Noto Serif Tamil", "Noto Serif Telugu", "Noto Serif Kannada",
+      "Noto Serif Malayalam", "Noto Serif Gurmukhi", "Noto Nastaliq Urdu",
+      Georgia, serif;
+  }
+
+  .edition-print-page {
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .edition-print-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .edition-print-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px double #14171a;
+  }
+
+  .edition-print-header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .edition-print-header p {
+    margin: 0;
+    font-size: 10px;
+  }
+
+  .edition-print-header span {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .edition-print-page-title {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .edition-print-story {
+    margin: 0 0 18px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .edition-print-story h3 {
+    margin: 0 0 6px;
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  .edition-print-story p {
+    margin: 6px 0;
+    font-size: 11px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+
+  .edition-print-story .edition-print-deck {
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  .edition-print-story .edition-print-byline {
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .edition-print-highlights {
+    margin: 8px 0;
+    padding-left: 20px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+}
